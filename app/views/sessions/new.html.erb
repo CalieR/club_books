@@ -1,6 +1,9 @@
 <h1>Welcome to Club Books</h1>
 
 <h3>Please log in:</h3>
+<% if flash[:errors] %>
+  <p><%= flash[:errors] %></p>
+<% end %>
 <%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
   <%= label_tag 'Name:' %>
   <%= text_field_tag 'name' %><br>
