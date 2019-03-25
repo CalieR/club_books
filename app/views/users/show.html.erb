@@ -1,4 +1,7 @@
 <h1><%= @user.name %></h1>
+<div>
+  <%= button_to 'Logout', logout_path %>
+</div>
 
 <h3>Books to read:</h3>
 <% @user.next_meetings.each do |m| %>
@@ -8,3 +11,22 @@
   <p><%= m.date_time %></p>
   <p><%= m.location %></p>
 <% end %>
+<% if @user.next_meetings.empty? %>
+  <p>You have no upcoming book club meetings.</p>
+<% end %>
+<br>
+<hr>
+<br>
+<h3>Your clubs:</h3>
+<% @user.clubs.each do |c| %>
+  <p><%= c.name %></p>
+  <p><%= c.description %></p>
+<% end %>
+<% if @user.clubs.empty? %>
+  <p>You aren't a member of any clubs. Click here to find one to join.</p>
+<% end %>
+<%= button_to 'See all clubs', clubs_path, method: :get %>
+<hr>
+<div>
+  <%= button_to 'Delete Account', @user, method: :delete %>
+</div>
