@@ -8,13 +8,14 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to @user
     else
-      flash[:errors] = 'Unrecognised user'
+      flash[:errors] = 'User not found'
       redirect_to login_path
     end
   end
 
   def destroy
-    sessions.delete :name
+    session.delete :user_id
+    redirect_to login_path
   end
 
 end
