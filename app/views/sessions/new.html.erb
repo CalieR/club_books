@@ -1,0 +1,10 @@
+<h1>Welcome to Club Books</h1>
+
+<h3>Please log in:</h3>
+<%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
+  <%= label_tag 'Name:' %>
+  <%= text_field_tag 'name' %><br>
+  <%= submit_tag 'Login' %>
+<% end %><br>
+
+<%= button_to 'Create a new user', new_user_path %>
