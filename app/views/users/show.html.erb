@@ -1,0 +1,10 @@
+<h1><%= @user.name %></h1>
+
+<h3>Books to read:</h3>
+<% @user.next_meetings.each do |m| %>
+  <p><%= m.book.title %></p>
+  <p><%= m.book.author %></p>
+  <p><%= m.club.name %></p>
+  <p><%= m.date_time %></p>
+  <p><%= m.location %></p>
+<% end %>
