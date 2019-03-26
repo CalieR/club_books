@@ -6,9 +6,10 @@ class ClubsController < ApplicationController
   end
 
   def show
-      @user = User.find(session[:user_id])
-      @club = Club.find(params[:id])
-      redirect_to @user unless @user.club_ids.include?(@club.id)
+    @user = User.find(session[:user_id])
+    @club = Club.find(params[:id])
+    @users = @club.users
+    redirect_to @user unless @user.club_ids.include?(@club.id)
   end
 
   def new
@@ -27,9 +28,8 @@ class ClubsController < ApplicationController
   end
 
   def update
-    # byebug
     @club = Club.find(params[:id])
-    @club.update(club_params(:description))
+    @club.update(club_params(:description, :host_id))
     redirect_to @club
   end
 

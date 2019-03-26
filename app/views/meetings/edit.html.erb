@@ -1,0 +1,9 @@
+<h1>Edit the next meeting of <%= @meeting.club.name %> </h1>
+
+<%= form_for [:club, @meeting] do |f| %>
+  <%= f.label 'Date and time' %><br>
+  <%= f.datetime_field :date_time %><br>
+  <%= f.label :location %><br>
+  <%= f.text_field :location %><br>
+  <%= f.submit %>
+<% end %>

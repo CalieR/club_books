@@ -17,7 +17,8 @@ class Club < ApplicationRecord
     end
 
     def host
-      self.memberships.find_by(host: true).user
+      host_member = self.memberships.find_by(host: true)
+      host_member ? host_member.user : User.new
     end
 
     def standard_members
@@ -26,5 +27,18 @@ class Club < ApplicationRecord
 
     def first_user=(user)
       self.memberships.create(user_id: user.id, admin: true, host: true)
+    end
+
+    def nil_host
+      self.memberships.find_by(host: true).update(host: false)
+    end
+
+    def host_id=(user_id)
+      new_host = self.memberships.find_by(user_id: user_id)
+      new_host.update(host: true)
+    end
+
+    def host_id
+      host ? host.id : User.new.id
     end
 end
