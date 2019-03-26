@@ -1,22 +1,29 @@
 <h1>All the clubs</h1>
 
+<p>Don't see a club you like? Start your own:</p>
+<%= button_to 'Create a Club', new_club_path, method: :get %>
+<hr>
 
 <% @clubs.each do |club| %>
-    <div> 
-
-        <%= club.name %><br>
-        <%= club.description %><br>
-        Members:
-        <%= club.memberships.count %><br>
-        Next book:
-       <% if club.next_book %> 
-
-        <%= club.next_book.title %><br>
-        <%= club.next_book.author %><br>
-        <%= club.next_book.description %><br>
-        <% else %>
-        TBC <br>
+  <div>
+      <%= club.name %><br>
+      <%= club.description %><br>
+      Members:  <%= club.memberships.count %><br>
+      <br>
+      Next book:<br>
+     <% if club.next_book %>
+      <%= club.next_book.title %><br>
+      <%= club.next_book.author %><br>
+      <%= club.next_book.description %><br>
+      <% else %>
+      TBC <br>
+      <% end %>
+      <% unless @user.club_ids.include?(club.id) %>
+        <%= form_for Membership.new do |f| %>
+        <%= f.hidden_field :club_id, value: club.id %>
+        <%= f.submit 'Join Club' %>
         <% end %>
-    </div>
-
+      <% end %>
+  </div>
+  <hr>
  <% end %>
