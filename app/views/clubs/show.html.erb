@@ -5,22 +5,47 @@
 <% if @user.id == @club.admin.id %>
 <%= button_to 'Edit', edit_club_path(@club), method: :get %>
 <% end %>
+
 Club admin:
 <%= @club.admin.name %><br>
+
 Club host:
-<%= @club.host.name %><br>
+<% if @club.host.id %>
+  <%= @club.host.name %><br>
+<% elsif @user.id == @club.admin.id %>
+  <%= form_for @club do |f| %>
+    <%= f.collection_select :host_id, @users, :id, :name %>
+    <%= f.submit "Set Host" %>
+  <% end %>
+<% else %>
+  TBC
+<% end %>
+
 Club members:
 <% @club.standard_members.each do |m| %>
     <%= m.name %>
-<%end%><br>
-Current book:<br>
+<%end%>
+
+<br><br>
+Next meeting:<br>
 <% if @club.next_book %>
-    Title:
     <%= @club.next_book.title %><br>
-    Author:
     <%= @club.next_book.author %><br>
-    Description:
-    <%= @club.next_book.description %>
+    <%= @club.next_book.description %><br>
+    <br>
+    When: <%= @club.next_meeting.date_time.strftime('%A, %e %B %Y, %H.%M') %><br>
+    Where: <%= @club.next_meeting.location %>
+    <%= button_to 'Edit meeting', [:edit, @club, @club.next_meeting], method: :get %>
+    <%= button_to 'Cancel meeting', [@club, @club.next_meeting], method: :delete %>
+    <%= form_for [@club, @club.next_meeting] do |f| %>
+      <%= f.hidden_field :current, value: false %>
+      <%= f.submit 'Meeting complete' %>
+    <% end %>
 <% else %>
-   TBC
+   <% if @user.id == @club.host.id %>
+    It's your turn to choose a book
+    <%= button_to 'Schedule a meeting', new_club_meeting_path(@club), method: :get %>
+   <% else %>
+    TBC
+   <% end %>
 <% end %>
