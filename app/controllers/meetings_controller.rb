@@ -29,6 +29,13 @@ class MeetingsController < ApplicationController
       redirect_to meeting.club
     end
 
+    def destroy
+      meeting = Meeting.find(params[:id])
+      club = meeting.club
+      meeting.destroy
+      redirect_to club
+    end
+
     private
 
     def meeting_params
