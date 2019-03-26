@@ -17,15 +17,26 @@ class ClubsController < ApplicationController
 
   def create
     @user = User.find(session[:user_id])
-    @club = Club.create(club_params)
+    @club = Club.create(club_params(:name, :description))
     @club.first_user = @user
+    redirect_to @club
+  end
+
+  def edit
+    @club = Club.find(params[:id])
+  end
+
+  def update
+    # byebug
+    @club = Club.find(params[:id])
+    @club.update(club_params(:description))
     redirect_to @club
   end
 
   private
 
-  def club_params
-    params.require(:club).permit(:name, :description)
+  def club_params(*args)
+    params.require(:club).permit(args)
   end
 
 end
