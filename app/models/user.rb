@@ -5,6 +5,6 @@ class User < ApplicationRecord
     validates :name, uniqueness: true
 
     def next_meetings
-      self.clubs.map(&:next_meeting)
+      self.clubs.map(&:next_meeting).compact
     end
 end

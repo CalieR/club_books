@@ -1,0 +1,23 @@
+<h1>Individual club</h1>
+
+<%= @club.name %><br>
+<%= @club.description %><br>
+Club admin:
+<%= @club.admin.name %><br>
+Club host:
+<%= @club.host.name %><br>
+Club members:
+<% @club.standard_members.each do |m| %>
+    <%= m.name %>
+<%end%><br>
+Current book:<br>
+<% if @club.next_book %>
+    Title:
+    <%= @club.next_book.title %><br>
+    Author:
+    <%= @club.next_book.author %><br>
+    Description:
+    <%= @club.next_book.description %>
+<% else %>
+   TBC
+<% end %>

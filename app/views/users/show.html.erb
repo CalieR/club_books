@@ -3,20 +3,22 @@
   <%= button_to 'Logout', logout_path %>
 </div>
 
+
 <h3>Books to read:</h3>
-<% @user.next_meetings.each do |m| %>
-  <p><%= m.book.title %></p>
-  <p><%= m.book.author %></p>
-  <p><%= m.club.name %></p>
-  <p><%= m.date_time %></p>
-  <p><%= m.location %></p>
-<% end %>
+
 <% if @user.next_meetings.empty? %>
   <p>You have no upcoming book club meetings.</p>
+<% else %>
+  <% @user.next_meetings.each do |m| %>
+    <p><%= m.book.title %></p>
+    <p><%= m.book.author %></p>
+    <p><%= m.club.name %></p>
+    <p><%= m.date_time %></p>
+    <p><%= m.location %></p>
+  <% end %>
 <% end %>
 <br>
-<hr>
-<br>
+
 <h3>Your clubs:</h3>
 <% @user.clubs.each do |c| %>
   <p><%= c.name %></p>
