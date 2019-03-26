@@ -23,3 +23,13 @@ end
 10.times do
     User.create(name: Faker::Name.first_name)
 end
+
+
+Meeting.create(book_id: 2, club_id:2, current: true, date_time: Faker::Time.between(Date.today, 1.month.from_now, :day), location: Faker::Address.full_address)
+
+Meeting.create(book_id: 1, club_id:1, current: true, date_time: Faker::Time.between(Date.today, 1.month.from_now, :day), location: Faker::Address.full_address)
+
+Meeting.create(book_id: 3, club_id:3, current: true, date_time: Faker::Time.between(Date.today, 1.month.from_now, :day), location: Faker::Address.full_address)
+
+
+Meeting.create(book_id: 2, club_id:1, current: false, date_time: Faker::Time.between(Date.today, 1.month.from_now, :day), location: Faker::Address.full_address)
