@@ -1,0 +1,22 @@
+<h1>All the clubs</h1>
+
+
+<% @clubs.each do |club| %>
+    <div> 
+
+        <%= club.name %><br>
+        <%= club.description %><br>
+        Members:
+        <%= club.memberships.count %><br>
+        Next book:
+       <% if club.next_book %> 
+
+        <%= club.next_book.title %><br>
+        <%= club.next_book.author %><br>
+        <%= club.next_book.description %><br>
+        <% else %>
+        TBC <br>
+        <% end %>
+    </div>
+
+ <% end %>

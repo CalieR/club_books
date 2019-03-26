@@ -31,5 +31,7 @@ Meeting.create(book_id: 1, club_id:1, current: true, date_time: Faker::Time.betw
 
 Meeting.create(book_id: 3, club_id:3, current: true, date_time: Faker::Time.between(Date.today, 1.month.from_now, :day), location: Faker::Address.full_address)
 
-
 Meeting.create(book_id: 2, club_id:1, current: false, date_time: Faker::Time.between(Date.today, 1.month.from_now, :day), location: Faker::Address.full_address)
+
+Membership.create(user_id: 1, club_id:1, host: true, admin: true)
+Membership.create(user_id: 2, club_id:1, host: false, admin: false)
