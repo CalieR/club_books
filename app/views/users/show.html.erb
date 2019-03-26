@@ -21,7 +21,7 @@
 
 <h3>Your clubs:</h3>
 <% @user.clubs.each do |c| %>
-  <p><%= c.name %></p>
+  <p><%= link_to c.name, c %></p>
   <p><%= c.description %></p>
 <% end %>
 <% if @user.clubs.empty? %>
