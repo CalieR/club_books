@@ -2,6 +2,9 @@
 
 <%= @club.name %><br>
 <%= @club.description %><br>
+<% if @user.id == @club.admin.id %>
+<%= button_to 'Edit', edit_club_path(@club), method: :get %>
+<% end %>
 Club admin:
 <%= @club.admin.name %><br>
 Club host:

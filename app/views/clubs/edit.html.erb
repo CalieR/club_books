@@ -1,0 +1,7 @@
+<h1><%= @club.name %></h1>
+
+<%= form_for @club do |f| %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.submit %>
+<% end %>
