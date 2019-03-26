@@ -8,19 +8,23 @@ class Club < ApplicationRecord
       self.meetings.find_by(current: true)
     end
 
-    def next_book 
+    def next_book
       next_meeting ? next_meeting.book : nil
     end
 
-    def admin 
+    def admin
       self.memberships.find_by(admin: true).user
     end
 
-    def host 
+    def host
       self.memberships.find_by(host: true).user
     end
 
-    def standard_members 
+    def standard_members
       self.memberships.where(admin: false, host: false).map(&:user)
+    end
+
+    def first_user=(user)
+      self.memberships.create(user_id: user.id, admin: true, host: true)
     end
 end
