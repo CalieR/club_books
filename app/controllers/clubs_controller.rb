@@ -1,5 +1,5 @@
 class ClubsController < ApplicationController
-  before_action :set_club, only: [:edit, :create, :show]
+  before_action :set_club, only: [:edit, :show]
   before_action :require_login
 
   def index
@@ -10,6 +10,7 @@ class ClubsController < ApplicationController
     @users = @club.users
     @user = current_user
     authorised_for_clubs
+    session[:club_id] = @club.id
   end
 
   def new
@@ -18,7 +19,7 @@ class ClubsController < ApplicationController
 
   def create
     @club = Club.create(club_params(:name, :description))
-    @club.first_user = @user
+    @club.first_user = current_user
     redirect_to @club
   end
 
