@@ -1,0 +1,18 @@
+<h1>Is this the book you were looking for?</h1>
+
+<%= content_tag :span, class: 'thumbnail' do %>
+  <% if @book.image_url %>
+    <%= image_tag @book.image_url %>
+  <% else %>
+    <%= image_tag 'app/assets/images/Screenshot 2019-03-25 at 16.33.06.png' %>
+  <% end %>
+<% end %>
+
+<%= content_tag :span, class: 'book-info' do %>
+  <p>Title: <%= @book.title %></p>
+  <p>Author: <%= @book.author %></p>
+  <p>Description: <%= @book.description %></p>
+<% end %>
+
+<p>Is this the book you were looking for?</p>
+<%= button_to 'Yes - schedule a meeting', new_club_meeting_path(@club), method: :get %>

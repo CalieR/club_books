@@ -8,9 +8,7 @@ class Book < ApplicationRecord
 
   def self.find_or_search_by(title)
     book = Book.find_by(title: title)
-    unless book
-      get_book(title)
-    end
+    book ? book : get_book(title)
   end
 
   def self.get_book(title)

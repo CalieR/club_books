@@ -10,6 +10,7 @@ class ClubsController < ApplicationController
     @users = @club.users
     @user = current_user
     authorised_for_clubs
+    session[:club_id] = @club.id
   end
 
   def new
