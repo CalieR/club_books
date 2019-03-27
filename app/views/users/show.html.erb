@@ -18,13 +18,9 @@
     <p><%= m.location %></p>
 
     <% if current_user.meeting_ids.exclude?(m.id) %>
-      <%= form_for Review.new do |f| %>
-        <%= f.hidden_field :meeting_id, value: m.id %>
-        <%= f.number_field :rating, min: 1, max: 10 %>
-        <%= f.submit 'Rate book' %>
-      <% end %>
+      <p>You haven't rated this book yet</p>
     <% else %>
-      You rated this book <%= current_user.reviews.find_by(meeting_id: m.id).rating %>/10
+      <p>You rated this book <%= current_user.reviews.find_by(meeting_id: m.id).rating %>/10</p>
     <% end %>
     <br>
     <br>
@@ -42,8 +38,18 @@
   <p>You aren't a member of any clubs. Click here to find one to join.</p>
 <% end %>
 <%= button_to 'See all clubs', clubs_path, method: :get %>
+<hr>
 
 <h3>Your books:</h3>
+<% if current_user.meetings.empty? %>
+  <p>You haven't read any books</p>
+<% else %>
+  <% current_user.meetings.each do |m| %>
+    <%= m.book.title %><br>
+    <%= m.book.author %><br>
+    <p>You rated this book <%= current_user.reviews.find_by(meeting_id: m.id).rating %>/10</p>
+  <% end %>
+<% end %>
 
 <hr>
 <div>
