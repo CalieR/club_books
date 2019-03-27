@@ -18,7 +18,7 @@
       <% else %>
       TBC <br>
       <% end %>
-      <% unless @user.club_ids.include?(club.id) %>
+      <% unless current_user.club_ids.include?(club.id) %>
         <%= form_for Membership.new do |f| %>
         <%= f.hidden_field :club_id, value: club.id %>
         <%= f.submit 'Join Club' %>

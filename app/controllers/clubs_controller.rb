@@ -1,15 +1,14 @@
 class ClubsController < ApplicationController
+  before_action :set_club, only: [:edit, :create, :show]
+  before_action :require_login
 
   def index
-      @user = User.find(session[:user_id])
       @clubs = Club.all
   end
 
   def show
-    @user = User.find(session[:user_id])
-    @club = Club.find(params[:id])
     @users = @club.users
-    redirect_to @user unless @user.club_ids.include?(@club.id)
+    authorised_for_clubs
   end
 
   def new
@@ -17,18 +16,15 @@ class ClubsController < ApplicationController
   end
 
   def create
-    @user = User.find(session[:user_id])
     @club = Club.create(club_params(:name, :description))
     @club.first_user = @user
     redirect_to @club
   end
 
   def edit
-    @club = Club.find(params[:id])
   end
 
   def update
-    @club = Club.find(params[:id])
     @club.update(club_params(:description, :host_id))
     redirect_to @club
   end
@@ -39,4 +35,11 @@ class ClubsController < ApplicationController
     params.require(:club).permit(args)
   end
 
+  def set_club 
+    @club = Club.find(params[:id])
+  end
+
+  def require_login 
+    authorised?
+  end
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :destroy]
+  # before_action :set_user, only: [:show, :destroy]
 
   def show
   end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name)
   end
 
-  def set_user
-    @user = User.find(session[:user_id])
-  end
+  # def set_user
+  #   @user = User.find(session[:user_id])
+  # end
 end

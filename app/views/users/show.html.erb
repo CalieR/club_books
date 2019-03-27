@@ -1,4 +1,4 @@
-<h1><%= @user.name %></h1>
+<h1><%= current_user.name %></h1>
 <div>
   <%= button_to 'Logout', logout_path %>
 </div>
@@ -6,10 +6,10 @@
 
 <h3>Books to read:</h3>
 
-<% if @user.next_meetings.empty? %>
+<% if current_user.next_meetings.empty? %>
   <p>You have no upcoming book club meetings.</p>
 <% else %>
-  <% @user.next_meetings.each do |m| %>
+  <% current_user.next_meetings.each do |m| %>
     <p><%= m.book.title %></p>
     <p><%= m.book.author %></p>
     <p><%= m.club.name %></p>
@@ -20,11 +20,11 @@
 <br>
 
 <h3>Your clubs:</h3>
-<% @user.clubs.each do |c| %>
+<% current_user.clubs.each do |c| %>
   <p><%= link_to c.name, c %></p>
   <p><%= c.description %></p>
 <% end %>
-<% if @user.clubs.empty? %>
+<% if current_user.clubs.empty? %>
   <p>You aren't a member of any clubs. Click here to find one to join.</p>
 <% end %>
 <%= button_to 'See all clubs', clubs_path, method: :get %>
