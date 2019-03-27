@@ -4,17 +4,31 @@
 </div>
 
 
-<h3>Books to read:</h3>
+<h3>Upcoming meetings:</h3>
 
 <% if current_user.next_meetings.empty? %>
   <p>You have no upcoming book club meetings.</p>
 <% else %>
+  <div class="">
   <% current_user.next_meetings.each do |m| %>
     <p><%= m.book.title %></p>
     <p><%= m.book.author %></p>
     <p><%= m.club.name %></p>
     <p><%= m.date_time %></p>
     <p><%= m.location %></p>
+
+    <% if current_user.meeting_ids.exclude?(m.id) %>
+      <%= form_for Review.new do |f| %>
+        <%= f.hidden_field :meeting_id, value: m.id %>
+        <%= f.number_field :rating, min: 1, max: 10 %>
+        <%= f.submit 'Rate book' %>
+      <% end %>
+    <% else %>
+      You rated this book <%= current_user.reviews.find_by(meeting_id: m.id).rating %>/10
+    <% end %>
+    <br>
+    <br>
+  </div>
   <% end %>
 <% end %>
 <br>
@@ -28,7 +42,10 @@
   <p>You aren't a member of any clubs. Click here to find one to join.</p>
 <% end %>
 <%= button_to 'See all clubs', clubs_path, method: :get %>
+
+<h3>Your books:</h3>
+
 <hr>
 <div>
-  <%= button_to 'Delete Account', @user, method: :delete %>
+  <%= button_to 'Delete Account', current_user, method: :delete %>
 </div>

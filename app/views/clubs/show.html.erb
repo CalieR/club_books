@@ -28,26 +28,39 @@ Club members:
 
 <br><br>
 Next meeting:<br>
+
 <% if @club.next_book %>
-    <%= @club.next_book.title %><br>
-    <%= @club.next_book.author %><br>
-    <%= @club.next_book.description %><br>
-    <br>
-    When: <%= @club.next_meeting.date_time.strftime('%A, %e %B %Y, %H.%M') %><br>
-    Where: <%= @club.next_meeting.location %>
-    <% if current_user.id == @club.host.id %>
-      <%= button_to 'Edit meeting', [:edit, @club, @club.next_meeting], method: :get %>
-      <%= button_to 'Cancel meeting', [@club, @club.next_meeting], method: :delete %>
-      <%= form_for [@club, @club.next_meeting] do |f| %>
-        <%= f.hidden_field :current, value: false %>
-        <%= f.submit 'Meeting complete' %>
-      <% end %>
+  <%= @club.next_book.title %><br>
+  <%= @club.next_book.author %><br>
+  <%= @club.next_book.description %><br>
+  <br>
+  When: <%= @club.next_meeting.date_time.strftime('%A, %e %B %Y, %H.%M') %><br>
+  Where: <%= @club.next_meeting.location %>
+
+  <% if current_user.meeting_ids.exclude?(@club.next_meeting.id) %>
+    <%= form_for Review.new do |f| %>
+      <%= f.hidden_field :meeting_id, value: @club.next_meeting.id %>
+      <%= f.number_field :rating, min: 1, max: 10 %>
+      <%= f.submit 'Rate book' %>
     <% end %>
+  <% end %>
+
+  <% if current_user.id == @club.host.id %>
+    <%= button_to 'Edit meeting', [:edit, @club, @club.next_meeting], method: :get %>
+    <%= button_to 'Cancel meeting', [@club, @club.next_meeting], method: :delete %>
+    <%= form_for [@club, @club.next_meeting] do |f| %>
+      <%= f.hidden_field :current, value: false %>
+      <%= f.submit 'Meeting complete' %>
+    <% end %>
+  <% end %>
+
 <% else %>
-   <% if current_user.id == @club.host.id %>
+
+ <% if current_user.id == @club.host.id %>
     It's your turn to choose a book
     <%= button_to 'Schedule a meeting', new_club_meeting_path(@club), method: :get %>
-   <% else %>
+ <% else %>
     TBC
-   <% end %>
+  <% end %>
+
 <% end %>

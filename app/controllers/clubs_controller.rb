@@ -8,6 +8,7 @@ class ClubsController < ApplicationController
 
   def show
     @users = @club.users
+    @user = current_user
     authorised_for_clubs
   end
 
@@ -35,11 +36,11 @@ class ClubsController < ApplicationController
     params.require(:club).permit(args)
   end
 
-  def set_club 
+  def set_club
     @club = Club.find(params[:id])
   end
 
-  def require_login 
+  def require_login
     authorised?
   end
 end
