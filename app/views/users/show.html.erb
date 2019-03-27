@@ -4,17 +4,27 @@
 </div>
 
 
-<h3>Books to read:</h3>
+<h3>Upcoming meetings:</h3>
 
 <% if current_user.next_meetings.empty? %>
   <p>You have no upcoming book club meetings.</p>
 <% else %>
+  <div class="">
   <% current_user.next_meetings.each do |m| %>
     <p><%= m.book.title %></p>
     <p><%= m.book.author %></p>
     <p><%= m.club.name %></p>
     <p><%= m.date_time %></p>
     <p><%= m.location %></p>
+
+    <% if current_user.meeting_ids.exclude?(m.id) %>
+      <p>You haven't rated this book yet</p>
+    <% else %>
+      <p>You rated this book <%= current_user.reviews.find_by(meeting_id: m.id).rating %>/10</p>
+    <% end %>
+    <br>
+    <br>
+  </div>
   <% end %>
 <% end %>
 <br>
@@ -29,6 +39,19 @@
 <% end %>
 <%= button_to 'See all clubs', clubs_path, method: :get %>
 <hr>
+
+<h3>Your books:</h3>
+<% if current_user.meetings.empty? %>
+  <p>You haven't read any books</p>
+<% else %>
+  <% current_user.meetings.each do |m| %>
+    <%= m.book.title %><br>
+    <%= m.book.author %><br>
+    <p>You rated this book <%= current_user.reviews.find_by(meeting_id: m.id).rating %>/10</p>
+  <% end %>
+<% end %>
+
+<hr>
 <div>
-  <%= button_to 'Delete Account', @user, method: :delete %>
+  <%= button_to 'Delete Account', current_user, method: :delete %>
 </div>

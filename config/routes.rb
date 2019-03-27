@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :books, only: [:show, :index]
   resources :memberships, only: [:create, :update, :delete]
   resources :users, except: [:edit, :update, :index]
+  resources :reviews, only: [:new, :create]
   resources :clubs do
     resources :meetings, except: [:show, :index]
   end
