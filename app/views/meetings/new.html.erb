@@ -1,8 +1,21 @@
 <h1>Schedule the next meeting for <%= @club.name %></h1>
 
+<%= content_tag :span, class: 'thumbnail' do %>
+  <% if @book.image_url %>
+    <%= image_tag @book.image_url %>
+  <% else %>
+    <%= image_tag 'app/assets/images/Screenshot 2019-03-25 at 16.33.06.png' %>
+  <% end %>
+<% end %>
+
+<%= content_tag :span, class: 'book-info' do %>
+  <p>Title: <%= @book.title %></p>
+  <p>Author: <%= @book.author %></p>
+  <p>Description: <%= @book.description %></p>
+<% end %>
+
 <%= form_for [:club, @meeting] do |f| %>
-  <%= f.label :book %><br>
-  <%= f.collection_select :book_id, @books, :id, :title %><br>
+  <%= f.hidden_field :book_id, value: @book.id %>
   <%= f.label 'Date and time' %><br>
   <%= f.datetime_field :date_time %><br>
   <%= f.label :location %><br>

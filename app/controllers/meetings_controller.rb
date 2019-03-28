@@ -1,9 +1,10 @@
 class MeetingsController < ApplicationController
+  before_action :require_login
 
     def new
       @user = User.find(session[:user_id])
       @club = Club.find(params[:club_id])
-      @books = Book.all
+      @book = Book.find(session[:book_id])
       @meeting = Meeting.new
     end
 
@@ -12,6 +13,7 @@ class MeetingsController < ApplicationController
       if meeting.valid?
         redirect_to meeting.club
       else
+        session[:book_id] = nil
         redirect_to new_club_meeting_path
       end
     end
@@ -40,5 +42,9 @@ class MeetingsController < ApplicationController
 
     def meeting_params
       params.require(:meeting).permit(:book_id, :date_time, :location, :current)
+    end
+
+    def require_login
+      authorised?
     end
 end
