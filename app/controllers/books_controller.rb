@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :require_login
 
   def new
   end
@@ -12,5 +13,11 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     session[:book_id] = @book.id
     @club = Club.find(session[:club_id])
+  end
+
+  private
+
+  def require_login
+    authorised?
   end
 end

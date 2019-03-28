@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   # before_action :set_user, only: [:show, :destroy]
+  before_action :require_login
 
   def show
   end
@@ -28,6 +29,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name)
+  end
+
+  def require_login
+    authorised?
   end
 
   # def set_user

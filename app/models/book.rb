@@ -15,11 +15,16 @@ class Book < ApplicationRecord
     book_data = search_api(title)
 
     book_title = get_book_title(book_data)
-    book_author = get_book_author(book_data)
-    book_description = get_book_snippet(book_data)
-    book_image = get_book_thumbnail(book_data)
+    book = Book.find_by(title: book_title)
+    if book
+      book
+    else
+      book_author = get_book_author(book_data)
+      book_description = get_book_description(book_data)
+      book_image = get_book_thumbnail(book_data)
 
-    book = Book.create(title: book_title, author: book_author, description: book_description, image_url: book_image)
+      Book.create(title: book_title, author: book_author, description: book_description, image_url: book_image)
+    end
   end
 
   def self.get_book_title(book_data)
@@ -30,9 +35,9 @@ class Book < ApplicationRecord
     book_data["volumeInfo"]["authors"].join(', ')
   end
 
-  def self.get_book_snippet(book_data)
-    if book_data["searchInfo"] && book_data["searchInfo"]["textSnippet"]
-      book_data["searchInfo"]["textSnippet"]
+  def self.get_book_description(book_data)
+    if book_data["volumeInfo"]["description"]
+      book_data["volumeInfo"]["description"]
     else
       "Not available."
     end

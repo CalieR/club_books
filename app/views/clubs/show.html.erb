@@ -30,6 +30,7 @@ Club members:
 Next meeting:<br>
 
 <% if @club.next_book %>
+  <%= image_tag @club.next_book.image_url %><br>
   <%= @club.next_book.title %><br>
   <%= @club.next_book.author %><br>
   <%= @club.next_book.description %><br>
@@ -58,7 +59,7 @@ Next meeting:<br>
 
  <% if current_user.id == @club.host.id %>
     It's your turn to choose a book
-    <%= button_to 'Schedule a meeting', new_club_meeting_path(@club), method: :get %>
+    <%= button_to 'Schedule a meeting', new_book_path, method: :get %>
  <% else %>
     TBC
   <% end %>
