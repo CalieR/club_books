@@ -4,14 +4,14 @@
 
 1. A user can create an account (profile)
 2. A user can login to the app
-3. A user can join an existing book club
-4. A user can create a new book club
-5. A club host can set the book a club is currently reading
+3. A user can join an existing book club - from clubs index
+4. A user can create a new book club -
+5. A club host can set the book a club is currently reading - (new meeting)
 6. A user can see their club’s current book(s)
 7. A club admin can edit their book club’s description
-8. A club admin can edit the time and place of book club meetings
+8. A club host can edit the time and place of book club meetings
 9. A club admin can pass administrative rights to another member
-10. A user can delete their account
+10. A user can delete their account - changed to user can delete a meeting
 
 ## Stretch goals
 
@@ -20,11 +20,12 @@
 3. A user can see their own book history
 4. A club’s host can change
 5. A user can search for a book via the Google Books API
-6. Add location details - ‘find a club near me’
+6. A user can always return to their own page (show) - header
 
 ## More stretches
 
-1. Statistics…A user can see most popular/most highly reviewed book etc
+1. Add location details - ‘find a club near me’
+2. Statistics…A user can see most popular/most highly reviewed book etc
 
 Things you may want to cover:
 
