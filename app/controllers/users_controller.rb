@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # before_action :set_user, only: [:show, :destroy]
-  before_action :require_login
+  before_action :require_login, except: [:new, :create]
 
   def show
   end

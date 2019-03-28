@@ -47,7 +47,7 @@ class Book < ApplicationRecord
     if book_data["volumeInfo"]["imageLinks"]["thumbnail"]
       book_data["volumeInfo"]["imageLinks"]["thumbnail"]
     else
-      nil
+      "https://www.fillmurray.com/640/360"
     end
   end
 

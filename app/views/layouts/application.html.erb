@@ -5,12 +5,17 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+
+    <link href="https://fonts.googleapis.com/css?family=Amiko" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    
+    <% if current_user.id %>
+      <%= button_to 'Home', current_user, method: :get, form: {style: 'display:inline-block'}  %>
+      <%= button_to 'Logout', logout_path, form: {style: 'display:inline-block'}  %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -4,6 +4,8 @@ class Club < ApplicationRecord
     has_many :meetings, dependent: :destroy
     has_many :books, through: :meetings
 
+    validates :name, presence: true
+
     def next_meeting
       self.meetings.find_by(current: true)
     end
@@ -26,7 +28,6 @@ class Club < ApplicationRecord
     end
 
     def first_user=(user)
-      byebug
       self.memberships.create(user_id: user.id, admin: true, host: true)
     end
 

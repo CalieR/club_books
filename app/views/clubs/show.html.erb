@@ -1,6 +1,7 @@
-<h1>Individual club</h1>
 
-<%= @club.name %><br>
+<h1><%= @club.name %></h1>
+
+Club description:
 <%= @club.description %><br>
 <% if current_user.id == @club.admin.id %>
 <%= button_to 'Edit', edit_club_path(@club), method: :get %>
@@ -14,7 +15,7 @@ Club host:
   <%= @club.host.name %><br>
 <% elsif current_user.id == @club.admin.id %>
   <%= form_for @club do |f| %>
-    <%= f.collection_select :host_id, current_users, :id, :name %>
+    <%= f.collection_select :host_id, @users, :id, :name %>
     <%= f.submit "Set Host" %>
   <% end %>
 <% else %>
@@ -30,9 +31,10 @@ Club members:
 Next meeting:<br>
 
 <% if @club.next_book %>
-  <%= image_tag @club.next_book.image_url %><br>
-  <%= @club.next_book.title %><br>
-  <%= @club.next_book.author %><br>
+
+  <div class="pic"><%= image_tag @club.next_book.image_url %></div><br>
+  <h3><%= @club.next_book.title %></h3>
+  <h4><%= @club.next_book.author %></h4>
   <%= @club.next_book.description %><br>
   <br>
   When: <%= @club.next_meeting.date_time.strftime('%A, %e %B %Y, %H.%M') %><br>

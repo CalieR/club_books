@@ -4,26 +4,42 @@
 <%= button_to 'Create a Club', new_club_path, method: :get %>
 <hr>
 
+<div >
+
 <% @clubs.each do |club| %>
-  <div>
+  <div class="club_info">
+    <div class="club_header">
+    Club name:
       <%= club.name %><br>
+      Club description:
       <%= club.description %><br>
+     
       Members:  <%= club.memberships.count %><br>
-      <br>
-      Next book:<br>
+      </div>
+       <br>Next book:<br>
      <% if club.next_book %>
-      <%= club.next_book.title %><br>
-      <%= club.next_book.author %><br>
-      <%= club.next_book.description %><br>
+    <div class="each_meeting clearfix"> 
+     <div class="meeting_image">
+          <%= image_tag club.next_book.image_url %>  
+      </div>
+      <div class="book_blurb">
+        <%= club.next_book.title %><br>
+        <%= club.next_book.author %><br>
+        <%= club.next_book.description %><br>
+      </div>
+    </div>
       <% else %>
       TBC <br>
+  
       <% end %>
+  
       <% unless current_user.club_ids.include?(club.id) %>
         <%= form_for Membership.new do |f| %>
         <%= f.hidden_field :club_id, value: club.id %>
         <%= f.submit 'Join Club' %>
         <% end %>
+     
       <% end %>
-  </div>
-  <hr>
+   </div>
  <% end %>
+</div>

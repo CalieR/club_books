@@ -13,3 +13,108 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-color: black;
+  font-family: "Amiko", sans-serif;
+  color: white;
+}
+
+a:link {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: grey;
+}
+
+.front {
+  margin: auto;
+  width: 90%;
+  height: 70%;
+  padding: 10px;
+  text-align: center;
+  margin: 100px auto;
+}
+
+.login {
+  margin: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  border-radius: 3px;
+}
+
+.meeting {
+  border: 0px solid yellow;
+}
+
+.clubs {
+  border: 0px solid white;
+  margin: 50px;
+}
+
+.meeting_image {
+  float: left;
+  margin: 2rem;
+}
+
+.book_details {
+  position: absolute;
+  float: left;
+  left: 25%;
+  top: 5%;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.each_club {
+  margin-bottom: 2rem;
+}
+
+.each_meeting {
+  position: relative;
+}
+
+.club-header {
+  width: 100%;
+  padding-bottom: 1rem;
+}
+
+.book_blurb {
+  position: absolute;
+  float: left;
+  left: 20%;
+  top: 5%;
+}
+
+.club_info {
+  border-bottom: 2px solid white;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+input[type="submit"] {
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 15px;
+  color: #c724d4;
+  border: 2px dashed #c724d4;
+  background: black;
+}
+
+.pic {
+  margin-top: 0.75rem;
+}
