@@ -26,7 +26,6 @@ class Club < ApplicationRecord
     end
 
     def first_user=(user)
-      byebug
       self.memberships.create(user_id: user.id, admin: true, host: true)
     end
 

@@ -13,3 +13,56 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-color: black;
+  font-family: "Amiko", sans-serif;
+  color: white;
+}
+
+a:link {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: grey;
+}
+
+.front {
+  margin: auto;
+  width: 90%;
+  height: 70%;
+  padding: 10px;
+  text-align: center;
+  margin: 100px auto;
+}
+
+.login {
+  margin: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  border-radius: 3px;
+}
+
+.meeting {
+  border: 3px solid yellow;
+}
+
+.each_meeting {
+  border: 2px solid pink;
+  margin: 50px;
+}
+
+.clubs {
+  border: 2px solid white;
+  margin: 50px;
+}

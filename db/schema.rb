@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_03_27_162950) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_url"
+    t.string "image_url", default: "https://www.fillmurray.com/640/360"
   end
 
   create_table "clubs", force: :cascade do |t|

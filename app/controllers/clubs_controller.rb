@@ -1,5 +1,5 @@
 class ClubsController < ApplicationController
-  before_action :set_club, only: [:edit, :show]
+  before_action :set_club, only: [:edit, :update, :show]
   before_action :require_login
 
   def index
