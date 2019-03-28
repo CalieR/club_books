@@ -3,15 +3,15 @@
 <!-- meetings section -->
 <div class="meeting">
   <h3>Upcoming meetings:</h3>
-  
+
   <% if current_user.next_meetings.empty? %>
     <p>You have no upcoming book club meetings.</p>
   <% else %>
-    
+
       <% current_user.next_meetings.each do |m| %>
       <div class="each_meeting clearfix">
         <div class="meeting_image">
-          <%= image_tag m.book.image_url %>  
+          <%= image_tag m.book.image_url %>
         </div>
           <div class="book_details">
             <p><%= m.book.title %></p>
@@ -39,20 +39,20 @@
  <h3>Your clubs:</h3>
 
 <div class="clubs">
- 
+
   <% current_user.clubs.each do |c| %>
   <div class="each_club">
     <p><%= link_to c.name, c %></p>
     <p><%= c.description %></p>
   </div>
   <% end %>
+</div>
 
   <% if current_user.clubs.empty? %>
     <p>You aren't a member of any clubs. Click here to find one to join.</p>
   <% end %>
   <%= button_to 'See all clubs', clubs_path, method: :get %>
-  
-</div>
+
 
 <!-- books section -->
 <div class="my_books">
@@ -62,17 +62,17 @@
 <% else %>
   <% current_user.meetings.each do |m| %>
 
-   <div class="each_meeting clearfix"> 
+   <div class="each_meeting clearfix">
     <div class="meeting_image">
-        <%= image_tag m.book.image_url %> 
-    </div> 
+        <%= image_tag m.book.image_url %>
+    </div>
     <div class="book_details">
     <br>
     <br>
         <%= m.book.title %><br>
         <%= m.book.author %><br>
 
-      
+
         <p>You rated this book <%= current_user.reviews.find_by(meeting_id: m.id).rating %>/10</p>
     </div>
   </div>
@@ -80,10 +80,6 @@
   <% end %>
 <% end %>
 </div>
-
-
-
-<hr>
 
 <div>
   <%= button_to 'Delete Account', current_user, method: :delete %>

@@ -38,7 +38,7 @@ a:hover {
   height: 70%;
   padding: 10px;
   text-align: center;
-  margin: 100px auto;
+  margin: auto;
 }
 
 .login {
@@ -117,4 +117,24 @@ input[type="submit"] {
 
 .pic {
   margin-top: 0.75rem;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+}
+
+li:last-child {
+  float: right
+}
+
+li a {
+  display: block;
+  padding: 0px 16px;
 }

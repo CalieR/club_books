@@ -13,8 +13,10 @@
 
   <body>
     <% if current_user.id %>
-      <%= button_to 'Home', current_user, method: :get, form: {style: 'display:inline-block'}  %>
-      <%= button_to 'Logout', logout_path, form: {style: 'display:inline-block'}  %>
+      <ul id="navbar">
+        <li><%= link_to image_tag('home', height: 60), current_user, method: :get  %></li>
+        <li><%= link_to image_tag('logout', height: 70), logout_path, method: :post %></li>
+      </ul>
     <% end %>
     <%= yield %>
   </body>

@@ -2,16 +2,15 @@
 <%= image_tag "logo", height: '300' %>
 
 
-<h3>Please log in:</h3>
 <% if flash[:errors] %>
   <p><%= flash[:errors] %></p>
 <% end %>
 <%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
-  <%= label_tag 'Name:' %>
+  <%= label_tag 'Name' %><br>
   <%= text_field_tag 'name' %><br>
-  <%= submit_tag 'Login', class: "login" %>
-<% end %><br>
+  <%= image_submit_tag 'login', height: 70, class: "login" %>
+<% end %>
 
-<%= button_to 'Create a new user', new_user_path, method: :get %>
+<%= link_to image_tag('create_user', height: 70), new_user_path, method: :get %>
 
 </div>
