@@ -4,6 +4,8 @@ class Club < ApplicationRecord
     has_many :meetings, dependent: :destroy
     has_many :books, through: :meetings
 
+    validates :name, presence: true
+
     def next_meeting
       self.meetings.find_by(current: true)
     end

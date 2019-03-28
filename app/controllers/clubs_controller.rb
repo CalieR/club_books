@@ -19,8 +19,12 @@ class ClubsController < ApplicationController
 
   def create
     @club = Club.create(club_params(:name, :description))
-    @club.first_user = current_user
-    redirect_to @club
+    if @club.valid?
+      @club.first_user = current_user
+      redirect_to @club
+    else
+      redirect_to new_club_path
+    end
   end
 
   def edit

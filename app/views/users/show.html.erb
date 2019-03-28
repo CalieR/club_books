@@ -1,7 +1,4 @@
 <h1><%= current_user.name %></h1>
-<div>
-  <%= button_to 'Logout', logout_path %>
-</div>
 
 <!-- meetings section -->
 <div class="meeting">
@@ -12,15 +9,15 @@
   <% else %>
     
       <% current_user.next_meetings.each do |m| %>
-      <div class="each_meeting">
+      <div class="each_meeting clearfix">
         <div class="meeting_image">
-          <%= image_tag m.book.image_url %>  <!-- TODO: if no image -->
+          <%= image_tag m.book.image_url %>  
         </div>
           <div class="book_details">
             <p><%= m.book.title %></p>
             <p><%= m.book.author %></p>
             <p><%= m.club.name %></p>
-            <p><%= m.date_time %></p>
+            <p><%= m.date_time.strftime('%A, %e %B %Y, %H.%M') %></p>
             <p><%= m.location %></p>
 
             <% if current_user.meeting_ids.exclude?(m.id) %>
@@ -44,14 +41,17 @@
 <div class="clubs">
  
   <% current_user.clubs.each do |c| %>
+  <div class="each_club">
     <p><%= link_to c.name, c %></p>
     <p><%= c.description %></p>
+  </div>
   <% end %>
+
   <% if current_user.clubs.empty? %>
     <p>You aren't a member of any clubs. Click here to find one to join.</p>
   <% end %>
   <%= button_to 'See all clubs', clubs_path, method: :get %>
-  <hr>
+  
 </div>
 
 <!-- books section -->
@@ -61,9 +61,22 @@
   <p>You haven't read any books</p>
 <% else %>
   <% current_user.meetings.each do |m| %>
-    <%= m.book.title %><br>
-    <%= m.book.author %><br>
-    <p>You rated this book <%= current_user.reviews.find_by(meeting_id: m.id).rating %>/10</p>
+
+   <div class="each_meeting clearfix"> 
+    <div class="meeting_image">
+        <%= image_tag m.book.image_url %> 
+    </div> 
+    <div class="book_details">
+    <br>
+    <br>
+        <%= m.book.title %><br>
+        <%= m.book.author %><br>
+
+      
+        <p>You rated this book <%= current_user.reviews.find_by(meeting_id: m.id).rating %>/10</p>
+    </div>
+  </div>
+
   <% end %>
 <% end %>
 </div>
