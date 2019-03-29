@@ -1,4 +1,5 @@
 class MeetingsController < ApplicationController
+  # user must be logged in to create a meeting
   before_action :require_login
 
     def new
@@ -8,13 +9,17 @@ class MeetingsController < ApplicationController
       @meeting = Meeting.new
     end
 
+      # merge needed to join params from nested routes
+      # don't need to keep the chosen book in cookies once the meeting is set
+      # we haven't set any validations on this yet
     def create
       meeting = Meeting.create(meeting_params.merge(club_id: params[:club_id]))
       if meeting.valid?
+        session[:book_id] = nil
         redirect_to meeting.club
       else
-        session[:book_id] = nil
-        redirect_to new_club_meeting_path
+        @club = club.find(params[:club_id])
+        redirect_to new_club_meeting_path(@club)
       end
     end
 

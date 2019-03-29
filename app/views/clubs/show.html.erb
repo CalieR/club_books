@@ -11,6 +11,7 @@ Club admin:
 <%= @club.admin.name %><br>
 
 Club host:
+<!-- .host is not an automatic association method, we built it in the club model-->
 <% if @club.host.id %>
   <%= @club.host.name %><br>
 <% elsif current_user.id == @club.admin.id %>
@@ -28,6 +29,8 @@ Club members:
 <%end%>
 
 <br><br>
+
+<!-- the next meeting section will only display if a book has been chosen-->
 Next meeting:<br>
 
 <% if @club.next_book %>
@@ -40,6 +43,11 @@ Next meeting:<br>
   When: <%= @club.next_meeting.date_time.strftime('%A, %e %B %Y, %H.%M') %><br>
   Where: <%= @club.next_meeting.location %>
 
+  <!-- once a user has left a review, that meeting is added to their list of meeting_ids.
+    the review form will be displayed if the user doesn't have the id of the next meeting
+    (ie they haven't got that meeting in their list of past meetings)
+   -->
+
   <% if current_user.meeting_ids.exclude?(@club.next_meeting.id) %>
     <%= form_for Review.new do |f| %>
       <%= f.hidden_field :meeting_id, value: @club.next_meeting.id %>
@@ -47,6 +55,8 @@ Next meeting:<br>
       <%= f.submit 'Rate book' %>
     <% end %>
   <% end %>
+
+<!-- if the logged-in user is the club host, they can see the meeting management buttons -->
 
   <% if current_user.id == @club.host.id %>
     <%= button_to 'Edit meeting', [:edit, @club, @club.next_meeting], method: :get %>
@@ -58,7 +68,7 @@ Next meeting:<br>
   <% end %>
 
 <% else %>
-
+<!-- the book choice option will appear if a user has been nominated as the next host -->
  <% if current_user.id == @club.host.id %>
     It's your turn to choose a book
     <%= button_to 'Schedule a meeting', new_book_path, method: :get %>

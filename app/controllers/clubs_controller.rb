@@ -1,11 +1,15 @@
 class ClubsController < ApplicationController
+  
+  # correct club must be identified (unless creating a new one)
   before_action :set_club, only: [:edit, :update, :show]
+  # before user can do anything they must be logged in (authorised)
   before_action :require_login
 
   def index
       @clubs = Club.all
   end
 
+  # user must be authorised for any club they wish to look at
   def show
     @users = @club.users
     @user = current_user
@@ -37,6 +41,7 @@ class ClubsController < ApplicationController
 
   private
 
+  # different params can be permitted depending on the action required
   def club_params(*args)
     params.require(:club).permit(args)
   end

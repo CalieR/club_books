@@ -86,6 +86,7 @@ input {
 
 .each_meeting {
   position: relative;
+  overflow: auto;
 }
 
 .club-header {
@@ -131,7 +132,7 @@ li {
 }
 
 li:last-child {
-  float: right
+  float: right;
 }
 
 li a {

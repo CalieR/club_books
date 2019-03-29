@@ -14,3 +14,9 @@
 <%= link_to image_tag('create_user', height: 70), new_user_path, method: :get %>
 
 </div>
+
+<!-- 
+  if user tried to log in but they don't exist yet, sessions#create displays error.
+  new user is redirected here to create a profile
+  ...or user comes stright here by clicking 'create user' on the homepage
+ -->

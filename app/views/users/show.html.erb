@@ -20,6 +20,7 @@
             <p><%= m.date_time.strftime('%A, %e %B %Y, %H.%M') %></p>
             <p><%= m.location %></p>
 
+    <!-- until a user reviews a book, it won't show up in their list of meetings -->
             <% if current_user.meeting_ids.exclude?(m.id) %>
               <p>You haven't rated this book yet</p>
             <% else %>

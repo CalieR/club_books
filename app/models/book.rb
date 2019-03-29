@@ -6,11 +6,16 @@ class Book < ApplicationRecord
   has_many :clubs, through: :meetings
   has_many :reviews, through: :meetings
 
+  # (this method is called by the book controller 'create' action)
+  # when user searches for a book, check the database to see if it was already created.
+  # in this way we build up the db every time a user sets a new meeting
   def self.find_or_search_by(title)
     book = Book.find_by(title: title)
     book ? book : get_book(title)
   end
 
+
+  # this method calls individual methods to get each book attribute
   def self.get_book(title)
     book_data = search_api(title)
 
@@ -22,7 +27,7 @@ class Book < ApplicationRecord
       book_author = get_book_author(book_data)
       book_description = get_book_description(book_data)
       book_image = get_book_thumbnail(book_data)
-
+     
       Book.create(title: book_title, author: book_author, description: book_description, image_url: book_image)
     end
   end
@@ -51,6 +56,7 @@ class Book < ApplicationRecord
     end
   end
 
+  # search the api with the input from the form
   def self.search_api(title)
     response = RestClient.get("https://www.googleapis.com/books/v1/volumes?q=#{title}")
     data = JSON.parse(response)
