@@ -1,4 +1,4 @@
-<h1>All the clubs</h1>
+<h1>Club Books Book Clubs</h1>
 
 <p>Don't see a club you like? Start your own:</p>
 <%= button_to 'Create a Club', new_club_path, method: :get %>
@@ -13,14 +13,14 @@
       <%= club.name %><br>
       Club description:
       <%= club.description %><br>
-     
+
       Members:  <%= club.memberships.count %><br>
       </div>
        <br>Next book:<br>
      <% if club.next_book %>
-    <div class="each_meeting clearfix"> 
+    <div class="each_meeting clearfix">
      <div class="meeting_image">
-          <%= image_tag club.next_book.image_url %>  
+          <%= image_tag club.next_book.image_url %>
       </div>
       <div class="book_blurb">
         <%= club.next_book.title %><br>
@@ -30,15 +30,15 @@
     </div>
       <% else %>
       TBC <br>
-  
+
       <% end %>
-  
+
       <% unless current_user.club_ids.include?(club.id) %>
         <%= form_for Membership.new do |f| %>
         <%= f.hidden_field :club_id, value: club.id %>
         <%= f.submit 'Join Club' %>
         <% end %>
-     
+
       <% end %>
    </div>
  <% end %>
